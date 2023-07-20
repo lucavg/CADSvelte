@@ -1,9 +1,18 @@
 {
 	"useTabs": true,
 	"singleQuote": true,
-	"trailingComma": "none",
+	"trailingComma": "all",
 	"printWidth": 100,
-	"plugins": ["prettier-plugin-svelte"],
-	"pluginSearchDirs": ["."],
-	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
+	"tabWidth": 4,
+	"arrowParens": "always",
+	"bracketSpacing": true,
+	"svelteStrictMode": true,
+	"svelteSortOrder": "options-styles-scripts-markup",
+	"svelteAllowShorthand": false,
+	"svelteBracketNewLine": true,
+	"svelteIndentScriptAndStyle": true,
+	"htmlWhitespaceSensitivity": "strict",
+	"semi": true,
+	"jsxBracketSameLine": false,
+	"jsxSingleQuote": true
 }
