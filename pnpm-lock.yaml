@@ -25,6 +25,9 @@ devDependencies:
   autoprefixer:
     specifier: ^10.4.14
     version: 10.4.14(postcss@8.4.27)
+  date-picker-svelte:
+    specifier: ^2.6.0
+    version: 2.6.0(svelte@4.1.2)
   eslint:
     specifier: ^8.28.0
     version: 8.46.0
@@ -850,6 +853,14 @@ packages:
     transitivePeerDependencies:
       - ts-node
     dev: false
+
+  /date-picker-svelte@2.6.0(svelte@4.1.2):
+    resolution: {integrity: sha512-xTzF1GTuAB1/NgDgM+no1y2raAfyZAMFtgEvrlL1VcHJYweggFoCK+1LHfMnVu4cJPLtC+NCRLThCMb/pu1xsg==}
+    peerDependencies:
+      svelte: ^3.24.0 || ^4.0.0
+    dependencies:
+      svelte: 4.1.2
+    dev: true
 
   /debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}

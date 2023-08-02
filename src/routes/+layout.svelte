@@ -11,7 +11,7 @@
 		<Navbar />
 	</div>
 
-	<main class="w-full md:w-8/12 flex-grow container mx-auto my-5">
+	<main class="w-10/12 md:w-8/12 flex-grow container mx-auto my-5">
 		<slot />
 	</main>
 </div>

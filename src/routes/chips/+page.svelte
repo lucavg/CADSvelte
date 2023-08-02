@@ -1,9 +1,3 @@
-<script lang="ts">
-	import type { PageData } from './$types';
-
-	export let data: PageData;
-</script>
-
 <div
 	class="w-11/12 mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
 >

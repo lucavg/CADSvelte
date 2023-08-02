@@ -1,6 +1,6 @@
 <div class="flex flex-col rounded-sm">
 	<div
-		class="w-11/12 mx-auto text-center bg-primary border-2 border-gray-300 text-white text-2xl p-2 my-2"
+		class="w-full mx-auto text-center bg-primary border-2 border-gray-300 text-white text-2xl p-2 my-2"
 	>
 		<span
 			>Sinds 1982 databank gevonden - verloren dieren provincie Antwerpen<br />
@@ -9,7 +9,7 @@
 	</div>
 
 	<div
-		class="w-11/12 mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
+		class="w-full mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
 	>
 		<span class="bg-primary flex-1 text-xl py-1">Contactinformatie</span>
 		<br />
@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div
-		class="w-11/12 mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
+		class="w-full mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
 	>
 		<span class="bg-primary flex-1 text-xlpy-1">CHIPS</span>
 		<br />
@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	<div
-		class="w-11/12 mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
+		class="w-full mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
 	>
 		<span class="bg-primary flex-1 text-xl py-1">MELDING VAN VERLOREN / GEVONDEN DIER !!!</span>
 		<br />
@@ -62,7 +62,7 @@
 		</div>
 	</div>
 	<div
-		class="w-11/12 mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
+		class="w-full mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
 	>
 		<span class="bg-primary flex-1 text-xl py-1"
 			>STAD ANTWERPEN GEEFT SUBSIDIE VOOR ONVRUCHTBAAR MAKEN EN CHIPPEN / REGISTREREN VAN KATTEN</span
@@ -85,7 +85,7 @@
 		</div>
 	</div>
 	<div
-		class="w-11/12 mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
+		class="w-full mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
 	>
 		<span class="bg-primary flex-1 text-xl py-1">Vrijwilligersvereniging</span>
 		<br />
