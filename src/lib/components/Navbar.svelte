@@ -3,7 +3,7 @@
 	import { navItemsStore } from '../../stores/navItemsStore';
 	import Menu from './Menu.svelte';
 	import MenuItem from './MenuItem.svelte';
-	import cad02 from '/cad02.gif';
+	import cad02 from '/cad02.webp';
 
 	let menuOpen = false;
 
