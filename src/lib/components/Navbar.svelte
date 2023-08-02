@@ -3,6 +3,7 @@
 	import { navItemsStore } from '../../stores/navItemsStore';
 	import Menu from './Menu.svelte';
 	import MenuItem from './MenuItem.svelte';
+	import cad02 from '/cad02.gif';
 
 	let menuOpen = false;
 
@@ -29,7 +30,7 @@
 
 <div class="bg-nav text-white px-6 py-4">
 	<div class="flex justify-between items-center">
-		<img src="/cad02.gif" alt="Logo" class="mr-4" />
+		<img src={cad02} alt="Logo" class="mr-4" />
 		<div class="text-lg">Coördinatie Antwerpse Dierenbescherming vzw</div>
 
 		<div class="hidden md:flex space-x-4">
