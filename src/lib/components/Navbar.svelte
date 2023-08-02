@@ -1,114 +1,67 @@
 <script lang="ts">
-	import { get } from 'svelte/store';
 	import { navItemsStore } from '../../stores/navItemsStore';
-	import Menu from './Menu.svelte';
-	import MenuItem from './MenuItem.svelte';
-	import cad02 from '/cad02.webp';
-
-	let menuOpen = false;
-
-	const toggleItem = (name: string) => {
-		const navItems = get(navItemsStore);
-		const item = navItems.find((item) => item.name === name);
-		if (item) {
-			item.isOpen = !item.isOpen;
-		}
-		navItemsStore.set(navItems);
-	};
-
-	const closeAll = () => {
-		const navItems = get(navItemsStore);
-		navItems.forEach((item) => {
-			if (item.isOpen) {
-				item.isOpen = false;
-			}
-		});
-		navItemsStore.set(navItems);
-		menuOpen = false;
-	};
 </script>
 
-<div class="bg-nav text-white px-6 py-4">
-	<div class="flex justify-between items-center">
-		<img src={cad02} alt="Logo" class="mr-4" />
-		<div class="text-lg">Coördinatie Antwerpse Dierenbescherming vzw</div>
-
-		<div class="hidden md:flex space-x-4">
-			{#each $navItemsStore as item}
-				{#if item.children && item.children.length > 0}
-					<Menu>
-						<span slot="toggle" class="cursor-pointer text-white hover:text-gray-300"
-							>{item.name}</span
-						>
-						{#each item.children as child}
-							<MenuItem>
-								<a href={child.link} class="block text-white hover:text-gray-300">{child.name}</a>
-							</MenuItem>
-						{/each}
-					</Menu>
-				{:else}
-					<a href={item.link} class="text-white hover:text-gray-300">{item.name}</a>
-				{/if}
-			{/each}
+<div class="navbar bg-primary">
+	<div class="navbar-start">
+		<div class="dropdown">
+			<button class="btn btn-ghost flex lg:hidden">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-5 w-5"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="#fff"
+					><path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M4 6h16M4 12h8m-8 6h16"
+					/></svg
+				>
+			</button>
+			<ul class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary rounded-box w-80">
+				{#each $navItemsStore as item}
+					{#if item.children && item.children.length > 0}
+						<li>
+							<details>
+								<summary class="text-neutral text-xl">{item.name}</summary>
+								<ul class="p-2 text-neutral">
+									{#each item.children as child}
+										<li><a href={child.link} class="text-xl">{child.name}</a></li>
+									{/each}
+								</ul>
+							</details>
+						</li>
+					{:else}
+						<li><a href={item.link} class="text-neutral text-xl">{item.name}</a></li>
+					{/if}
+				{/each}
+			</ul>
 		</div>
-
-		<button class="md:hidden" on:click={() => (menuOpen = !menuOpen)}>
-			{#if menuOpen}
-				<svg
-					fill="none"
-					stroke="currentColor"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					viewBox="0 0 24 24"
-					class="w-6 h-6"
-				>
-					<path d="M6 18L18 6M6 6l12 12" />
-				</svg>
-			{/if}
-			{#if !menuOpen}
-				<svg
-					fill="none"
-					stroke="currentColor"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					viewBox="0 0 24 24"
-					class="w-6 h-6"
-				>
-					<path d="M4 6h16M4 12h16m-7 6h7" />
-				</svg>
-			{/if}
-		</button>
+		<a href="." class="flex flex-row items-center">
+			<img alt="logo" src="/cad02.webp" />
+			<p class="no-animation text-neutral text-xl">Coördinatie Antwerpse Dierenbescherming vzw</p>
+		</a>
 	</div>
-
-	{#if menuOpen}
-		<div class="md:hidden mt-4 space-y-2">
+	<div class="navbar-end hidden lg:flex">
+		<ul class="menu menu-horizontal px-1">
 			{#each $navItemsStore as item}
 				{#if item.children && item.children.length > 0}
-					<div>
-						<button
-							class="cursor-pointer text-white hover:text-gray-300"
-							on:click={() => toggleItem(item.name)}>{item.name}</button
-						>
-						{#if item.isOpen}
-							{#each item.children as child}
-								<MenuItem>
-									<a
-										on:click={closeAll}
-										href={child.link}
-										class="block text-white hover:text-gray-300">{child.name}</a
-									>
-								</MenuItem>
-							{/each}
-						{/if}
-					</div>
+					<li>
+						<details>
+							<summary class="text-neutral text-xl">{item.name}</summary>
+							<ul class="p-2 bg-primary text-neutral text-xl">
+								{#each item.children as child}
+									<li><a href={child.link} class="text-xl">{child.name}</a></li>
+								{/each}
+							</ul>
+						</details>
+					</li>
 				{:else}
-					<a href={item.link} on:click={closeAll} class="block text-white hover:text-gray-300"
-						>{item.name}</a
-					>
+					<li><a href={item.link} class="text-neutral text-xl">{item.name}</a></li>
 				{/if}
 			{/each}
-		</div>
-	{/if}
+		</ul>
+	</div>
 </div>

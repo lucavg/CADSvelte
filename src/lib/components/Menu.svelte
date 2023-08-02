@@ -2,7 +2,7 @@
 	<button class="focus:outline-none">
 		<slot name="toggle" />
 	</button>
-	<menu class="mt-2 space-y-2 bg-nav">
+	<menu class="mt-2 space-y-2 bg-primary">
 		<slot />
 	</menu>
 </div>

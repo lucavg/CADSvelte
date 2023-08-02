@@ -7,9 +7,9 @@
 <div
 	class="w-11/12 mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
 >
-	<span class="bg-nav flex-1 text-xl py-1">KATTEN</span>
+	<span class="bg-primary flex-1 text-xl py-1">KATTEN</span>
 	<br />
-	<div class="flex-1 bg-gray-100 text-dark text-left ml-4 my-2">
+	<div class="flex-1 bg-gray-100 text-secondary text-left ml-4 my-2">
 		<p class="text-md font-bold">BELANGRIJK VOOR DE EIGENAARS WAARVAN HUN KAT GECHIPT IS!</p>
 		<p>
 			Bij elke aangifte die we krijgen kijken we na of de chip correct geregistreerd is. Al te
@@ -77,9 +77,9 @@
 <div
 	class="w-11/12 mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2"
 >
-	<span class="bg-nav flex-1 text-xl py-1">HONDEN</span>
+	<span class="bg-primary flex-1 text-xl py-1">HONDEN</span>
 	<br />
-	<div class="flex-1 bg-gray-100 text-dark text-left ml-4 my-2">
+	<div class="flex-1 bg-gray-100 text-secondary text-left ml-4 my-2">
 		<p>
 			Sinds 1 september 1998 moeten alle honden wettelijk verplicht geïdentificeerd en geregistreerd
 			worden. Dit moet gebeuren voordat ze verkocht of weggegeven worden. Zorg er voor dat u alle
@@ -94,7 +94,7 @@
 			<br /><br />
 			Verzeker U ervan dat uw persoonlijke gegevens correct zijn en blijven. U kunt het verifiëren op
 			de website van de databank voor honden:
-			<a class="nav-link" href="http://www.dogid.be">http://www.dogid.be</a>
+			<a class="text-primary" href="http://www.dogid.be">http://www.dogid.be</a>
 			<br /><br />
 			Wij zijn voorstander om uw hond een halsband te laten dragen waarop een metalen plaatje is aangebracht
 			met uw telefoonnummer ingegraveerd. Het is een dubbele zekerheid en op die manier kunt u voorkomen
