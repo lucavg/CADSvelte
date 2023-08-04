@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { navItemsStore } from '../../stores/navItemsStore';
 </script>
 
@@ -37,9 +38,20 @@
 						<li><a href={item.link} class="text-neutral text-xl">{item.name}</a></li>
 					{/if}
 				{/each}
+				{#if !$page.data.user}
+					<li><a href="/auth/login" class="text-neutral text-xl">Login</a></li>
+				{:else}
+					<li>
+						<form action="/auth/logout" method="post">
+							<button type="submit" class="text-neutral text-xl border-none cursor-pointer"
+								>Logout</button
+							>
+						</form>
+					</li>
+				{/if}
 			</ul>
 		</div>
-		<a href="." class="flex flex-row items-center">
+		<a href="/" class="flex flex-row items-center">
 			<img alt="logo" src="/cad02.webp" />
 			<p class="no-animation text-neutral text-xl">Coördinatie Antwerpse Dierenbescherming vzw</p>
 		</a>
@@ -62,6 +74,17 @@
 					<li><a href={item.link} class="text-neutral text-xl">{item.name}</a></li>
 				{/if}
 			{/each}
+			{#if !$page.data.user}
+				<li><a href="/auth/login" class="text-neutral text-xl">Login</a></li>
+			{:else}
+				<li>
+					<form action="/auth/logout" method="post">
+						<button type="submit" class="text-neutral text-xl border-none cursor-pointer"
+							>Logout</button
+						>
+					</form>
+				</li>
+			{/if}
 		</ul>
 	</div>
 </div>

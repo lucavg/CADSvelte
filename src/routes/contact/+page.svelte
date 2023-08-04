@@ -1,3 +1,11 @@
+<script lang="ts">
+	import type { PageServerLoad } from '../auth/login/$types';
+
+	export const load: PageServerLoad = async (event) => {
+		console.log(event);
+	};
+</script>
+
 <div class="w-full mx-auto mt-2 flex flex-col text-center border-2 border-gray-300 text-white my-2">
 	<span class="bg-primary flex-1 text-xl py-1">Contact informatie</span>
 	<div class="flex-1 bg-gray-100 text-secondary text-left ml-4 my-2">

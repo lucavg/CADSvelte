@@ -1,9 +1,7 @@
 <script>
 	import Footer from '$lib/components/Footer.svelte';
-	import ScrollTotop from '$lib/components/ScrollTotop.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import '../app.css';
-	import NavbarUpdate from '$lib/components/Navbar.svelte';
 </script>
 
 <div class="flex flex-col min-h-screen text-black bg-gray-100 h-4/5">

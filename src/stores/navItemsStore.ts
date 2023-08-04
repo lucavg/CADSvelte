@@ -3,7 +3,6 @@ import { writable } from 'svelte/store';
 interface NavItem {
 	name: string;
 	link?: string;
-	isOpen?: boolean;
 	children?: NavItem[];
 }
 
@@ -44,6 +43,5 @@ export const navItemsStore = writable<NavItem[]>([
 		]
 	},
 	{ name: 'Contact', link: '/contact' },
-	{ name: 'Vragen', link: '/vragen' },
-	{ name: 'Login', link: '/login' }
+	{ name: 'Vragen', link: '/vragen' }
 ]);
