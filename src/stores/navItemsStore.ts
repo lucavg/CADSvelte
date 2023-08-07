@@ -29,6 +29,7 @@ export const navItemsStore = writable<NavItem[]>([
 			{ name: 'Verloren allerlei', link: '/randomLost' }
 		]
 	},
+	{ name: 'RIP', link: '/rip' },
 	{
 		name: 'Andere',
 		children: [
