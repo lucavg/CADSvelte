@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:71Sh1rZWf2KAEutD@db.ghyfiwjocihqmmtfocjd.supabase.co:5432/postgres?pgbouncer=true"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -24,4 +24,53 @@ model Roles {
   id   Int    @id @default(autoincrement())
   name String @unique
   User User[]
+}
+
+model Cat {
+  id                Int      @id @default(autoincrement())
+  ras               CatRace  @relation(fields: [rasId], references: [id])
+  rasId             Int
+  gecastreerd       Boolean
+  datumVerloren     DateTime
+  gemeenteVerloren  Location @relation(fields: [locationId], references: [id])
+  locationId        Int
+  eigenaarStraat    String
+  huisNr            String
+  naam              String
+  fotoUrl           String
+  chipped           Boolean
+  geslacht          Sex      @relation(fields: [sexId], references: [id])
+  sexId             Int
+  rip               Boolean
+  kleur             Color    @relation(fields: [colorId], references: [id])
+  colorId           Int
+  antwoordEigenaars String
+}
+
+model CatRace {
+  id      Int     @id @default(autoincrement())
+  name    String  @unique
+  cats    Cat[]
+  enabled Boolean @default(true)
+}
+
+model Location {
+  id      Int     @id @default(autoincrement())
+  name    String  @unique
+  cats    Cat[]
+  enabled Boolean @default(true)
+}
+
+model Sex {
+  id      Int     @id @default(autoincrement())
+  name    String  @unique
+  cats    Cat[]
+  enabled Boolean @default(true)
+}
+
+model Color {
+  id      Int     @id @default(autoincrement())
+  name    String  @unique
+  cats    Cat[]
+  enabled Boolean @default(true)
 }

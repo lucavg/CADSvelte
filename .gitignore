@@ -11,3 +11,4 @@ vite.config.ts.timestamp-*
 /prisma/dev.db
 /prisma/.env
 /prisma/.env.*
+prisma/seed.ts
