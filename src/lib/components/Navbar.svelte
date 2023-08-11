@@ -27,7 +27,7 @@
 						<li>
 							<details>
 								<summary class="text-neutral text-xl">{item.name}</summary>
-								<ul class="p-2 text-neutral">
+								<ul class="p-2 text-neutral z-10">
 									{#each item.children as child}
 										<li><a href={child.link} class="text-xl">{child.name}</a></li>
 									{/each}
@@ -63,7 +63,7 @@
 					<li>
 						<details>
 							<summary class="text-neutral text-xl">{item.name}</summary>
-							<ul class="p-2 bg-primary text-neutral text-xl">
+							<ul class="p-2 bg-primary text-neutral text-xl z-10">
 								{#each item.children as child}
 									<li><a href={child.link} class="text-xl">{child.name}</a></li>
 								{/each}

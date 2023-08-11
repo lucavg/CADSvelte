@@ -1,0 +1,80 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\lucav\AppData\Local\pnpm\global\5\node_modules\yarn\bin\yarn.js add -D prisma
+
+PATH: 
+  C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Python311\Scripts\;C:\Python311\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\lucav\AppData\Local\Microsoft\WindowsApps;C:\Users\lucav\AppData\Local\GitHubDesktop\bin;C:\Users\lucav\AppData\Roaming\npm;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Users\lucav\AppData\Local\pnpm;C:\Users\lucav\.dotnet\tools
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.17.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'D:\CAD\CADSvelte\node_modules\@prisma\debug\dist\common.d.ts'
+
+npm manifest: 
+  {
+  	"name": "cadsvelte",
+  	"version": "0.0.1",
+  	"private": true,
+  	"scripts": {
+  		"dev": "vite dev",
+  		"build": "vite build",
+  		"preview": "vite preview",
+  		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+  		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+  		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+  		"format": "prettier --plugin-search-dir . --write .",
+  		"update-types": "npx supabase gen types typescript --project-id \"ghyfiwjocihqmmtfocjd\" --schema public > src/lib/db/types.ts",
+  		"seed": "ts-node prisma/seed.ts"
+  	},
+  	"prisma": {
+  		"seed": "vite-node ./prisma/seed.ts"
+  	},
+  	"devDependencies": {
+  		"@sveltejs/adapter-auto": "^2.0.0",
+  		"@sveltejs/adapter-vercel": "^3.0.3",
+  		"@sveltejs/kit": "^1.20.4",
+  		"@types/bcrypt": "^5.0.0",
+  		"@types/node": "^20.4.8",
+  		"@typescript-eslint/eslint-plugin": "^5.45.0",
+  		"@typescript-eslint/parser": "^5.45.0",
+  		"autoprefixer": "^10.4.14",
+  		"date-picker-svelte": "^2.6.0",
+  		"eslint": "^8.28.0",
+  		"eslint-config-prettier": "^8.5.0",
+  		"eslint-plugin-svelte": "^2.30.0",
+  		"postcss": "^8.4.27",
+  		"prettier": "^2.8.0",
+  		"prettier-plugin-svelte": "^2.10.1",
+  		"supabase": "^1.82.6",
+  		"svelte": "^4.0.5",
+  		"svelte-backtotop": "^0.0.0",
+  		"svelte-check": "^3.4.3",
+  		"sveltekit-superforms": "^1.5.0",
+  		"tailwindcss": "^3.3.3",
+  		"ts-node": "^10.9.1",
+  		"tslib": "^2.4.1",
+  		"typescript": "^5.1.6",
+  		"vite": "^4.4.2",
+  		"vite-node": "^0.34.1",
+  		"zod": "^3.21.4"
+  	},
+  	"type": "module",
+  	"dependencies": {
+  		"@prisma/client": "^5.1.1",
+  		"bcrypt": "^5.1.0",
+  		"cookies": "^0.8.0",
+  		"daisyui": "^3.5.0"
+  	}
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

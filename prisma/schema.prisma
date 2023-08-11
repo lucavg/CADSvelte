@@ -1,3 +1,14 @@
+generator zod {
+  provider              = "zod-prisma"
+  output                = "../src/zod-schemas"
+  relationModel         = true
+  modelCase             = "PascalCase"
+  modelSuffix           = "Model"
+  useDecimalJs          = true
+  imports               = "../src/zod-schemas"
+  prismaJsonNullability = true
+}
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -26,51 +37,61 @@ model Roles {
   User User[]
 }
 
-model Cat {
-  id                Int      @id @default(autoincrement())
-  ras               CatRace  @relation(fields: [rasId], references: [id])
-  rasId             Int
-  gecastreerd       Boolean
-  datumVerloren     DateTime
-  gemeenteVerloren  Location @relation(fields: [locationId], references: [id])
-  locationId        Int
-  eigenaarStraat    String
-  huisNr            String
-  naam              String
-  fotoUrl           String
-  chipped           Boolean
-  geslacht          Sex      @relation(fields: [sexId], references: [id])
-  sexId             Int
-  rip               Boolean
-  kleur             Color    @relation(fields: [colorId], references: [id])
-  colorId           Int
-  antwoordEigenaars String
+model LostCat {
+  id             Int       @id @default(autoincrement())
+  name           String
+  race           CatRace   @relation(fields: [raceId], references: [id])
+  raceId         Int
+  sex            Sex       @relation(fields: [sexId], references: [id])
+  sexId          Int
+  castrated      Boolean?
+  color          Color     @relation(fields: [colorId], references: [id])
+  colorId        Int
+  age            Int?
+  dateLost       DateTime
+  cityLost       String?
+  description    String
+  photoUrl       String?
+  chipped        Boolean?
+  chipNumber     String?   @unique
+  collar         String?
+  ownerName      String
+  ownerEmail     String
+  ownerStreet    String
+  ownerCity      String
+  ownerPhone     String?
+  ownerCellphone String?
+  comments       String?
+  rip            Boolean?
+  dateReported   DateTime
+  location       Location? @relation(fields: [locationId], references: [id])
+  locationId     Int?
 }
 
 model CatRace {
-  id      Int     @id @default(autoincrement())
-  name    String  @unique
-  cats    Cat[]
-  enabled Boolean @default(true)
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  enabled Boolean   @default(true)
+  LostCat LostCat[]
 }
 
 model Location {
-  id      Int     @id @default(autoincrement())
-  name    String  @unique
-  cats    Cat[]
-  enabled Boolean @default(true)
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  enabled Boolean   @default(true)
+  LostCat LostCat[]
 }
 
 model Sex {
-  id      Int     @id @default(autoincrement())
-  name    String  @unique
-  cats    Cat[]
-  enabled Boolean @default(true)
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  enabled Boolean   @default(true)
+  LostCat LostCat[]
 }
 
 model Color {
-  id      Int     @id @default(autoincrement())
-  name    String  @unique
-  cats    Cat[]
-  enabled Boolean @default(true)
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  enabled Boolean   @default(true)
+  LostCat LostCat[]
 }
