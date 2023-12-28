@@ -1,15 +1,7 @@
 <script lang="ts">
 	export let animalFormData: any;
-	export let colors: { value: number; label: string }[];
-	export let races: { value: number; label: string }[];
-	export let locations: { value: number; label: string }[];
 
 	const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-	$: animalColor = colors.find((color) => color.value === animalFormData.colorId)?.label;
-	$: animalRace = races.find((race) => race.value === animalFormData.raceId)?.label;
-	$: ownerLocation = locations.find(
-		(location) => location.value === animalFormData.locationId
-	)?.label;
 
 	let avatarUrl: string = '/placeholder.png';
 </script>
@@ -41,22 +33,22 @@
 			<p class="text-neutral">
 				<span class="underline text-secondary">Ras:</span>
 				<br />
-				{#if animalRace == null}
+				{#if animalFormData.race.name == null}
 					<span class="text-red-500">Geen ras gekozen</span>
 				{:else}
 					<span class="text-black">
-						{animalRace}
+						{animalFormData.race.name}
 					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
 				<span class="underline text-secondary">Kleur:</span>
 				<br />
-				{#if animalColor == null}
+				{#if animalFormData.color.name == null}
 					<span class="text-red-500">Geen kleur gekozen</span>
 				{:else}
 					<span class="text-black">
-						{animalColor}
+						{animalFormData.color.name}
 					</span>
 				{/if}
 			</p>
@@ -231,11 +223,11 @@
 			<p class="text-neutral">
 				<span class="underline text-secondary">Locatie:</span>
 				<br />
-				{#if ownerLocation == '' || ownerLocation == null}
+				{#if animalFormData.location.name == '' || animalFormData.location.name == null}
 					<span class="text-red-500">Geen locatie gekozen</span>
 				{:else}
 					<span class="text-black">
-						{ownerLocation}
+						{animalFormData.location.name}
 					</span>
 				{/if}
 			</p>

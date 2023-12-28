@@ -109,7 +109,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto mt-4 items-center place-content-center">
 	{#each pagedData as animal}
-		<LostAnimal {animal} colors={data.colors} locations={data.locations} races={data.races} />
+		<LostAnimal {animal} />
 	{/each}
 </div>
 

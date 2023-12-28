@@ -5,9 +5,6 @@
 	let avatarUrl: string = '/placeholder.png';
 
 	export let animal: any;
-	export let colors: { value: number; label: string }[];
-	export let races: { value: number; label: string }[];
-	export let locations: { value: number; label: string }[];
 </script>
 
 <div class="card lg:card-side shadow-xl bg-primary">
@@ -53,7 +50,7 @@
 
 <dialog id={animal.name} class="modal">
 	<div class="modal-box bg-white w-11/12 max-w-5xl flex flex-col items-center justify-center">
-		<AnimalDataModal animalFormData={animal} {races} {colors} {locations} />
+		<AnimalDataModal animalFormData={animal} />
 		<div class="modal-action mt-4">
 			<form method="dialog">
 				<button class="btn">Close</button>
