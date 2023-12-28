@@ -1,12 +1,6 @@
 generator zod {
-  provider              = "zod-prisma"
-  output                = "../src/zod-schemas"
-  relationModel         = true
-  modelCase             = "PascalCase"
-  modelSuffix           = "Model"
-  useDecimalJs          = true
-  imports               = "../src/zod-schemas"
-  prismaJsonNullability = true
+  provider = "zod-prisma-types"
+  output   = "../src/zod-schemas"
 }
 
 generator client {
@@ -39,32 +33,43 @@ model Roles {
 
 model LostCat {
   id             Int       @id @default(autoincrement())
+  /// @zod.string.min(1, { message: "Gelieve een valide naam in te geven" }).max(99, { message: "Deze naam is te lang!" })
   name           String
   race           CatRace   @relation(fields: [raceId], references: [id])
+  /// @zod.number.gte(1, { message: "Gelieve een ras te kiezen" })
   raceId         Int
   sex            Sex       @relation(fields: [sexId], references: [id])
+  /// @zod.number.gte(1, { message: "Gelieve een geslacht te kiezen" })
   sexId          Int
   castrated      Boolean?
   color          Color     @relation(fields: [colorId], references: [id])
+  /// @zod.number.gte(1, { message: "Gelieve een kleur te kiezen" })
   colorId        Int
   age            Int?
+  /// @zod.date({ required_error: "Gelieve een correcte datum te kiezen", invalid_type_error: "Gelieve een correcte datum te kiezen!" })
   dateLost       DateTime
   cityLost       String?
+  /// @zod.string.min(1, { message: "Gelieve een omschrijving in te geven" }).max(999, { message: "Deze omschrijving is te lang!" })
   description    String
+  /// @zod.string.min(1, { message: "Gelieve een foto te uploaden" })
   photoUrl       String?
   chipped        Boolean?
   chipNumber     String?   @unique
   collar         String?
+  /// @zod.string.min(1, { message: "Gelieve een naam in te geven voor het baasje" }).max(99, { message: "Deze naam is te lang!" })
   ownerName      String
   ownerEmail     String
   ownerStreet    String
   ownerCity      String
   ownerPhone     String?
   ownerCellphone String?
+  response       String?
   comments       String?
   rip            Boolean?
+  /// @zod.date({ required_error: "Gelieve een correcte datum te kiezen", invalid_type_error: "Gelieve een correcte datum te kiezen!" })
   dateReported   DateTime
   location       Location? @relation(fields: [locationId], references: [id])
+  /// @zod.number.gte(1, { message: "Gelieve een locatie te kiezen" })
   locationId     Int?
 }
 

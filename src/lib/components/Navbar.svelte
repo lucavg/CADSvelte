@@ -1,6 +1,31 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { navigating, page } from '$app/stores';
+	import { onMount } from 'svelte';
 	import { navItemsStore } from '../../stores/navItemsStore';
+
+	onMount(() => {
+		const handleClickOutside = (event: any) => {
+			if (!event.target.closest('.navbar')) {
+				const detailsElements = document.querySelectorAll('details[open]');
+				detailsElements.forEach((el) => el.removeAttribute('open'));
+			}
+		};
+
+		window.addEventListener('click', handleClickOutside);
+
+		return () => {
+			window.removeEventListener('click', handleClickOutside);
+		};
+	});
+
+	onMount(() => {
+		const unsubscribe = navigating.subscribe(() => {
+			const detailsElements = document.querySelectorAll('details[open]');
+			detailsElements.forEach((el) => el.removeAttribute('open'));
+		});
+
+		return unsubscribe;
+	});
 </script>
 
 <div class="navbar bg-primary">

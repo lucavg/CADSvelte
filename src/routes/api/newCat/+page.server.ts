@@ -1,20 +1,29 @@
 import { db } from '$lib/database';
 import { redirect, fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/server';
-import { LostCatModel } from '../../../zod-schemas';
+import { LostCatSchema } from '../../../zod-schemas';
 
 export const load = async ({ locals: { user } }) => {
-	if (user) {
+	if (!user) {
 		throw redirect(302, '/');
 	}
 
-	const form = await superValidate(LostCatModel);
+	const form = await superValidate(LostCatSchema);
+	form.data.rip = false;
 
-	const races = await db.catRace.findMany({ where: { enabled: true } });
-	const locations = await db.location.findMany({ where: { enabled: true } });
+	const racesNotMapped = await db.catRace.findMany({ where: { enabled: true } });
+	const locationsNotMapped = await db.location.findMany({ where: { enabled: true } });
 	const genders = await db.sex.findMany({ where: { enabled: true } });
-	const colors = await db.color.findMany({ where: { enabled: true } });
-	const cities = await db.lostCat.findMany({ select: { cityLost: true }, distinct: ['cityLost'] });
+	const colorsNotMapped = await db.color.findMany({ where: { enabled: true } });
+	const cityiesNotMapped = await db.lostCat.findMany({
+		select: { cityLost: true },
+		distinct: ['cityLost']
+	});
+	const cities = cityiesNotMapped.map((city) => city.cityLost);
+	cities.push('Nieuwe stad toevoegen');
+	const colors = colorsNotMapped.map((item) => ({ value: item.id, label: item.name }));
+	const locations = locationsNotMapped.map((item) => ({ value: item.id, label: item.name }));
+	const races = racesNotMapped.map((item) => ({ value: item.id, label: item.name }));
 
 	return {
 		races,
@@ -28,13 +37,15 @@ export const load = async ({ locals: { user } }) => {
 
 export const actions = {
 	default: async ({ request }) => {
-		const form = await superValidate(request, LostCatModel);
+		const body = await request.formData();
+
+		const form = await superValidate(body, LostCatSchema);
+		console.log(form);
 
 		if (!form.valid) {
-			throw fail(400, { invalid: true });
+			form.message = 1;
+			return fail(400, { form });
 		}
-
-		console.log(form.data);
 
 		const newLostCat = await db.lostCat.create({
 			data: {
@@ -67,7 +78,7 @@ export const actions = {
 		if (newLostCat) {
 			throw redirect(303, '/catsLost');
 		} else {
-			throw fail(500, { error: 'Unable to create new lost cat.' });
+			return { form };
 		}
 	}
 };

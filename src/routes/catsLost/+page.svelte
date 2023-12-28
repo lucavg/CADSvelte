@@ -11,9 +11,9 @@
 	const itemsPerPage = 9;
 
 	let pagedData: any[] = [];
-	let raceFilter: string | null = null;
-	let sexFilter: string | null = null;
-	let colorFilter: string | null = null;
+	let raceFilter: string | null = '';
+	let sexFilter: string | null = '';
+	let colorFilter: string | null = '';
 	let searchFilter: string = '';
 
 	$: if (browser && data && data.lostCats) {
@@ -47,7 +47,7 @@
 	}
 </script>
 
-{#if !$page.data.user}
+{#if $page.data.user}
 	<ul class="menu menu-vertical lg:menu-horizontal rounded-box bg-primary">
 		<li>
 			<a href="/api/newCat" class="text-neutral text-xl">Nieuwe kat toevoegen </a>
@@ -56,7 +56,7 @@
 {/if}
 
 <div class="form-control flex md:flex-row w-full items-center md:justify-between">
-	<div class="form-control w-full max-w-xs mx-1">
+	<div class="form-control w-full max-w-md md:mx-1">
 		<label class="label" for="naam">
 			<span class="label-text text-secondary">Zoeken op naam:</span>
 		</label>
@@ -64,37 +64,41 @@
 			name="naam"
 			type="text"
 			placeholder="Vb. Felix"
-			class="input input-bordered bg-primary text-secondary w-full max-w-xs"
+			style="min-width: 150px;"
+			class="input input-bordered border-primary border-2 bg-white w-full max-w-lg"
 			bind:value={searchFilter}
 		/>
 	</div>
-	<div class="form-control w-full max-w-xs mx-1">
+	<div class="form-control w-full max-w-md md:mx-1">
 		<label class="label" for="ras">
 			<span class="label-text text-secondary">Ras:</span>
 		</label>
-		<select class="select select-bordered bg-primary" bind:value={raceFilter}>
+		<select class="select select-bordered border-primary border-2 bg-white" bind:value={raceFilter}>
 			<option selected value="">-- Selecteer Ras --</option>
 			{#each data.races as race}
 				<option value={race.name}>{race.name}</option>
 			{/each}
 		</select>
 	</div>
-	<div class="form-control w-full max-w-xs mx-1">
+	<div class="form-control w-full max-w-md md:mx-1">
 		<label class="label" for="kleur">
 			<span class="label-text text-secondary">Kleur:</span>
 		</label>
-		<select class="select select-bordered bg-primary" bind:value={colorFilter}>
+		<select
+			class="select select-bordered border-primary border-2 bg-white"
+			bind:value={colorFilter}
+		>
 			<option selected value="">-- Selecteer Kleur --</option>
 			{#each data.colors as color}
 				<option value={color.name}>{color.name}</option>
 			{/each}
 		</select>
 	</div>
-	<div class="form-control w-full max-w-xs mx-1">
+	<div class="form-control w-full max-w-md md:mx-1">
 		<label class="label" for="geslacht">
 			<span class="label-text text-secondary">Geslacht:</span>
 		</label>
-		<select class="select select-bordered bg-primary" bind:value={sexFilter}>
+		<select class="select select-bordered border-primary border-2 bg-white" bind:value={sexFilter}>
 			<option selected value="">-- Selecteer Geslacht --</option>
 			{#each data.races as race}
 				<option value={race.name}>{race.name}</option>
@@ -103,21 +107,23 @@
 	</div>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
 	{#each pagedData as animal}
 		<LostAnimal {animal} />
 	{/each}
 </div>
 
-<div class="p-4">
-	<div class="pagination">
-		{#each Array(Math.ceil(pagedData.length / itemsPerPage)) as _, index (index)}
-			<button
-				class={currentPage === index + 1 ? 'btn btn-primary' : 'btn'}
-				on:click={() => gotoPage(index + 1)}
-			>
-				{index + 1}
-			</button>
-		{/each}
+{#if pagedData.length > itemsPerPage}
+	<div class="p-4 flex justify-center">
+		<div class="pagination">
+			{#each Array(Math.ceil(pagedData.length / itemsPerPage)) as _, index (index)}
+				<button
+					class={currentPage === index + 1 ? 'btn btn-primary' : 'btn'}
+					on:click={() => gotoPage(index + 1)}
+				>
+					{index + 1}
+				</button>
+			{/each}
+		</div>
 	</div>
-</div>
+{/if}

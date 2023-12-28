@@ -1,20 +1,22 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { formatDate } from '$lib/utils';
+	let avatarUrl: string = '/placeholder.png';
 
 	export let animal: any;
 </script>
 
-<div class="card lg:card-side bg-primary shadow-xl">
+<div class="card w-96 md:mx-10 lg:mx-5 h-min shadow-xl bg-primary">
 	<figure>
-		<img
-			class="md:m-2 text-neutral"
-			src={animal.photoUrl ?? '/placeholder.png'}
-			alt={animal.name}
-		/>
+		<img src={animal.photoUrl ?? avatarUrl} alt={animal.name} />
 	</figure>
 	<div class="card-body">
-		<h2 class="card-title text-neutral underline text-3xl">{animal.name}</h2>
+		<h2 class="card-title">
+			{animal.name}
+		</h2>
+		<p class="text-neutral">
+			<span class="text-secondary">Omschrijving:</span>
+			{animal.description}
+		</p>
 		<p class="text-neutral">
 			<span class="text-secondary">Ras:</span>
 			{animal.race.name}
@@ -32,14 +34,5 @@
 			<span class="text-secondary">Datum verloren:</span>
 			{formatDate(animal.dateLost)}
 		</p>
-		<p class="text-neutral">
-			<span class="text-secondary">Omschrijving:</span>
-			{animal.description}
-		</p>
-		<!-- {#if $page.data.user}
-			<div class="card-actions justify-end">
-				<button class="btn btn-primary">Listen</button>
-			</div>
-		{/if} -->
 	</div>
 </div>
