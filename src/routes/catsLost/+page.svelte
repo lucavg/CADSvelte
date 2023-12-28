@@ -76,7 +76,7 @@
 		<select class="select select-bordered border-primary border-2 bg-white" bind:value={raceFilter}>
 			<option selected value="">-- Selecteer Ras --</option>
 			{#each data.races as race}
-				<option value={race.name}>{race.name}</option>
+				<option value={race.label}>{race.label}</option>
 			{/each}
 		</select>
 	</div>
@@ -90,7 +90,7 @@
 		>
 			<option selected value="">-- Selecteer Kleur --</option>
 			{#each data.colors as color}
-				<option value={color.name}>{color.name}</option>
+				<option value={color.label}>{color.label}</option>
 			{/each}
 		</select>
 	</div>
@@ -101,29 +101,27 @@
 		<select class="select select-bordered border-primary border-2 bg-white" bind:value={sexFilter}>
 			<option selected value="">-- Selecteer Geslacht --</option>
 			{#each data.races as race}
-				<option value={race.name}>{race.name}</option>
+				<option value={race.label}>{race.label}</option>
 			{/each}
 		</select>
 	</div>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto mt-4 items-center place-content-center">
 	{#each pagedData as animal}
-		<LostAnimal {animal} />
+		<LostAnimal {animal} colors={data.colors} locations={data.locations} races={data.races} />
 	{/each}
 </div>
 
-{#if pagedData.length > itemsPerPage}
-	<div class="p-4 flex justify-center">
-		<div class="pagination">
-			{#each Array(Math.ceil(pagedData.length / itemsPerPage)) as _, index (index)}
-				<button
-					class={currentPage === index + 1 ? 'btn btn-primary' : 'btn'}
-					on:click={() => gotoPage(index + 1)}
-				>
-					{index + 1}
-				</button>
-			{/each}
-		</div>
+<div class="p-4 flex justify-center">
+	<div class="pagination">
+		{#each Array(Math.ceil(pagedData.length / itemsPerPage)) as _, index (index)}
+			<button
+				class={currentPage === index + 1 ? 'btn btn-primary' : 'btn'}
+				on:click={() => gotoPage(index + 1)}
+			>
+				{index + 1}
+			</button>
+		{/each}
 	</div>
-{/if}
+</div>

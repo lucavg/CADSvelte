@@ -4,6 +4,7 @@
 	export let races: { value: number; label: string }[];
 	export let locations: { value: number; label: string }[];
 
+	const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
 	$: animalColor = colors.find((color) => color.value === animalFormData.colorId)?.label;
 	$: animalRace = races.find((race) => race.value === animalFormData.raceId)?.label;
 	$: ownerLocation = locations.find(
@@ -13,7 +14,7 @@
 	let avatarUrl: string = '/placeholder.png';
 </script>
 
-<div class="card w-full max-w-3xl md:mx-10 lg:mx-5 h-min shadow-xl bg-primary">
+<div class="card h-min mt-60 mx-auto">
 	<figure>
 		<img
 			src={animalFormData.photoUrl ?? avatarUrl}
@@ -21,7 +22,7 @@
 			class="mt-5 max-w-96"
 		/>
 	</figure>
-	<div class="card-body grid grid-cols-1 md:grid-cols-3 gap-10">
+	<div class="card-body grid grid-cols-1 md:grid-cols-3 gap-20">
 		<div>
 			<h2 class="card-title">
 				Gegevens {animalFormData.name}
@@ -32,7 +33,7 @@
 				{#if animalFormData.description == '' || animalFormData.description == null}
 					<span class="text-red-500">Geen omschrijving gegeven</span>
 				{:else}
-					<span class="text-neutral">
+					<span class="text-black">
 						{animalFormData.description}
 					</span>
 				{/if}
@@ -43,7 +44,9 @@
 				{#if animalRace == null}
 					<span class="text-red-500">Geen ras gekozen</span>
 				{:else}
-					{animalRace}
+					<span class="text-black">
+						{animalRace}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -52,13 +55,17 @@
 				{#if animalColor == null}
 					<span class="text-red-500">Geen kleur gekozen</span>
 				{:else}
-					{animalColor}
+					<span class="text-black">
+						{animalColor}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
 				<span class="underline text-secondary">Geslacht:</span>
 				<br />
-				{animalFormData.sexId == 13 ? 'Man' : 'Vrouw'}
+				<span class="text-black">
+					{animalFormData.sexId == 13 ? 'Man' : 'Vrouw'}
+				</span>
 			</p>
 			<p class="text-neutral">
 				<span class="underline text-secondary">Leeftijd:</span>
@@ -66,7 +73,9 @@
 				{#if animalFormData.age == null}
 					<span class="text-red-500">Geen leeftijd opgegeven</span>
 				{:else}
-					{animalFormData.age}
+					<span class="text-black">
+						{animalFormData.age}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -74,7 +83,9 @@
 					>{animalFormData.sexId == 13 ? 'Gecastreerd' : 'Gesteriliseerd'}:</span
 				>
 				<br />
-				{animalFormData.castrated == true ? 'Ja' : 'Nee'}
+				<span class="text-black">
+					{animalFormData.castrated == true ? 'Ja' : 'Nee'}
+				</span>
 			</p>
 			<p class="text-neutral">
 				<span class="underline text-secondary">Verloren te:</span>
@@ -82,7 +93,9 @@
 				{#if animalFormData.cityLost == null || animalFormData.cityLost == ''}
 					<span class="text-red-500">Geen stad opgegeven</span>
 				{:else}
-					{animalFormData.cityLost}
+					<span class="text-black">
+						{animalFormData.cityLost}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -91,7 +104,9 @@
 				{#if animalFormData.dateLost == null}
 					<span class="text-red-500">Geen datum opgegeven</span>
 				{:else}
-					{animalFormData.dateLost}
+					<span class="text-black">
+						{animalFormData.dateLost.toLocaleDateString('nl-BE', options)}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -100,21 +115,27 @@
 				{#if animalFormData.dateReported == null}
 					<span class="text-red-500">Geen datum opgegeven</span>
 				{:else}
-					{animalFormData.dateReported}
+					<span class="text-black">
+						{animalFormData.dateReported.toLocaleDateString('nl-BE', options)}
+					</span>
 				{/if}
 			</p>
 			{#if animalFormData.chipNumber}
 				<p class="text-neutral">
 					<span class="underline text-secondary">Chipnummer:</span>
 					<br />
-					{animalFormData.chipNumber}
+					<span class="text-black">
+						{animalFormData.chipNumber}
+					</span>
 				</p>
 			{/if}
 			{#if animalFormData.collar}
 				<p class="text-neutral">
 					<span class="underline text-secondary">Halsband:</span>
 					<br />
-					{animalFormData.collar}
+					<span class="text-black">
+						{animalFormData.collar}
+					</span>
 				</p>
 			{/if}
 		</div>
@@ -126,7 +147,9 @@
 				{#if animalFormData.ownerName == '' || animalFormData.ownerName == null}
 					<span class="text-red-500">Geen naam opgegeven</span>
 				{:else}
-					{animalFormData.ownerName}
+					<span class="text-black">
+						{animalFormData.ownerName}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -135,7 +158,9 @@
 				{#if animalFormData.ownerEmail == '' || animalFormData.ownerEmail == null}
 					<span class="text-red-500">Geen email opgegeven</span>
 				{:else}
-					{animalFormData.ownerEmail}
+					<span class="text-black">
+						{animalFormData.ownerEmail}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -144,7 +169,9 @@
 				{#if animalFormData.ownerStreet == '' || animalFormData.ownerStreet == null}
 					<span class="text-red-500">Geen straat opgegeven</span>
 				{:else}
-					{animalFormData.ownerStreet}
+					<span class="text-black">
+						{animalFormData.ownerStreet}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -153,7 +180,9 @@
 				{#if animalFormData.ownerCity == '' || animalFormData.ownerCity == null}
 					<span class="text-red-500">Geen stad opgegeven</span>
 				{:else}
-					{animalFormData.ownerCity}
+					<span class="text-black">
+						{animalFormData.ownerCity}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -162,7 +191,9 @@
 				{#if animalFormData.ownerPhone == '' || animalFormData.ownerPhone == null}
 					<span class="text-red-500">Geen telefoonnummer opgegeven</span>
 				{:else}
-					{animalFormData.ownerPhone}
+					<span class="text-black">
+						{animalFormData.ownerPhone}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -171,7 +202,9 @@
 				{#if animalFormData.ownerCellphone == '' || animalFormData.ownerCellphone == null}
 					<span class="text-red-500">Geen gsm nummer opgegeven</span>
 				{:else}
-					{animalFormData.ownerCellphone}
+					<span class="text-black">
+						{animalFormData.ownerCellphone}
+					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -180,7 +213,9 @@
 				{#if animalFormData.comments == '' || animalFormData.comments == null}
 					<span class="text-red-500">Geen opmerkingen gegeven</span>
 				{:else}
-					{animalFormData.comments}
+					<span class="text-black">
+						{animalFormData.comments}
+					</span>
 				{/if}
 			</p>
 		</div>
@@ -189,7 +224,9 @@
 			<p class="text-neutral">
 				<span class="underline text-secondary">RIP:</span>
 				<br />
-				{animalFormData.rip}
+				<span class="text-black">
+					{animalFormData.rip ? 'Ja' : 'Nee'}
+				</span>
 			</p>
 			<p class="text-neutral">
 				<span class="underline text-secondary">Locatie:</span>
@@ -197,7 +234,9 @@
 				{#if ownerLocation == '' || ownerLocation == null}
 					<span class="text-red-500">Geen locatie gekozen</span>
 				{:else}
-					{ownerLocation}
+					<span class="text-black">
+						{ownerLocation}
+					</span>
 				{/if}
 			</p>
 		</div>

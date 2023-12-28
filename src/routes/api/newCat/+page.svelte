@@ -330,6 +330,7 @@
 				<label class="label underline" for="cityLost">
 					<span class="label-text text-secondary">Stad verloren*</span>
 				</label>
+				<input type="hidden" name="cityLost" bind:value={$form.cityLost} />
 				<Select
 					items={data.cities}
 					name="cityLost"
@@ -495,6 +496,7 @@
 				<label class="label underline" for="ownerCity">
 					<span class="label-text text-secondary">Stad</span>
 				</label>
+				<input type="hidden" name="ownerCity" bind:value={$form.ownerCity} />
 				<Select
 					items={data.cities}
 					name="ownerCity"
