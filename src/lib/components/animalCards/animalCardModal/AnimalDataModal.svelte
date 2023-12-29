@@ -86,7 +86,7 @@
 					<span class="text-red-500">Geen stad opgegeven</span>
 				{:else}
 					<span class="text-black">
-						{animalFormData.cityLost}
+						{animalFormData.cityLost.name}
 					</span>
 				{/if}
 			</p>
@@ -136,66 +136,66 @@
 			<p class="text-neutral">
 				<span class="underline text-secondary">Naam eigenaar:</span>
 				<br />
-				{#if animalFormData.ownerName == '' || animalFormData.ownerName == null}
+				{#if animalFormData.owner.name == '' || animalFormData.name == null}
 					<span class="text-red-500">Geen naam opgegeven</span>
 				{:else}
 					<span class="text-black">
-						{animalFormData.ownerName}
+						{animalFormData.owner.name}
 					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
 				<span class="underline text-secondary">Email eigenaar:</span>
 				<br />
-				{#if animalFormData.ownerEmail == '' || animalFormData.ownerEmail == null}
+				{#if animalFormData.owner.email == '' || animalFormData.owner.email == null}
 					<span class="text-red-500">Geen email opgegeven</span>
 				{:else}
 					<span class="text-black">
-						{animalFormData.ownerEmail}
+						{animalFormData.owner.email}
 					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
 				<span class="underline text-secondary">Straat eigenaar:</span>
 				<br />
-				{#if animalFormData.ownerStreet == '' || animalFormData.ownerStreet == null}
+				{#if animalFormData.owner.street == '' || animalFormData.owner.street == null}
 					<span class="text-red-500">Geen straat opgegeven</span>
 				{:else}
 					<span class="text-black">
-						{animalFormData.ownerStreet}
+						{animalFormData.owner.street}
 					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
 				<span class="underline text-secondary">Stad eigenaar:</span>
 				<br />
-				{#if animalFormData.ownerCity == '' || animalFormData.ownerCity == null}
+				{#if animalFormData.owner.city.name == '' || animalFormData.owner.city.name == null}
 					<span class="text-red-500">Geen stad opgegeven</span>
 				{:else}
 					<span class="text-black">
-						{animalFormData.ownerCity}
+						{animalFormData.owner.city.name}
 					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
 				<span class="underline text-secondary">Telefoonnummer eigenaar:</span>
 				<br />
-				{#if animalFormData.ownerPhone == '' || animalFormData.ownerPhone == null}
+				{#if animalFormData.owner.phone == '' || animalFormData.owner.phone == null}
 					<span class="text-red-500">Geen telefoonnummer opgegeven</span>
 				{:else}
 					<span class="text-black">
-						{animalFormData.ownerPhone}
+						{animalFormData.owner.phone}
 					</span>
 				{/if}
 			</p>
 			<p class="text-neutral">
 				<span class="underline text-secondary">GSM nummer eigenaar:</span>
 				<br />
-				{#if animalFormData.ownerCellphone == '' || animalFormData.ownerCellphone == null}
+				{#if animalFormData.owner.cellphone == '' || animalFormData.owner.cellphone == null}
 					<span class="text-red-500">Geen gsm nummer opgegeven</span>
 				{:else}
 					<span class="text-black">
-						{animalFormData.ownerCellphone}
+						{animalFormData.owner.cellphone}
 					</span>
 				{/if}
 			</p>

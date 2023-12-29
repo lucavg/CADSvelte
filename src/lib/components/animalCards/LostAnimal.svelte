@@ -7,9 +7,13 @@
 	export let animal: any;
 </script>
 
-<div class="card lg:card-side shadow-xl bg-primary">
+<div class="card min-w-fit lg:card-side lg:max-h-[430px] shadow-xl bg-primary">
 	<figure>
-		<img class="card max-h-52 mt-2 mx-2" src={animal.photoUrl ?? avatarUrl} alt={animal.name} />
+		<img
+			class="rounded lg:mt-2 lg:max-h-[200px] mx-2"
+			src={animal.photoUrl ?? avatarUrl}
+			alt={animal.name}
+		/>
 	</figure>
 	<div class="card-body">
 		<h2 class="card-title">
@@ -35,6 +39,11 @@
 		<p class="text-neutral">
 			<span class="text-secondary">Datum verloren:</span>
 			{formatDate(animal.dateLost)}
+		</p>
+		<p class="text-neutral"><span class="text-secondary">Verloren te:</span> {animal.age}</p>
+		<p class="text-neutral">
+			<span class="text-secondary">Straat verloren:</span>
+			{animal.owner.street}
 		</p>
 		{#if $page.data.user}
 			<div class="card-actions mt-3 justify-evenly">

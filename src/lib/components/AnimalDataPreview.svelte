@@ -3,12 +3,17 @@
 	export let colors: { value: number; label: string }[];
 	export let races: { value: number; label: string }[];
 	export let locations: { value: number; label: string }[];
+	export let cities: { value: number; label: string }[];
 
 	$: animalColor = colors.find((color) => color.value === animalFormData.colorId)?.label;
 	$: animalRace = races.find((race) => race.value === animalFormData.raceId)?.label;
 	$: ownerLocation = locations.find(
 		(location) => location.value === animalFormData.locationId
 	)?.label;
+	$: catCity = cities.find((city) => city.value === animalFormData.catCityId)?.label;
+	$: ownerCity = cities.find((city) => city.value === animalFormData.ownerCityId)?.label;
+
+	$: animalFormData, console.log(animalFormData);
 
 	let avatarUrl: string = '/placeholder.png';
 </script>
@@ -79,10 +84,14 @@
 			<p class="text-neutral">
 				<span class="underline text-secondary">Verloren te:</span>
 				<br />
-				{#if animalFormData.cityLost == null || animalFormData.cityLost == ''}
-					<span class="text-red-500">Geen stad opgegeven</span>
+				{#if animalFormData.catCityName == null || animalFormData.catCityName == ''}
+					{#if catCity == null || catCity == ''}
+						<span class="text-red-500">Geen stad opgegeven</span>
+					{:else}
+						{catCity}
+					{/if}
 				{:else}
-					{animalFormData.cityLost}
+					{animalFormData.catCityName}
 				{/if}
 			</p>
 			<p class="text-neutral">
@@ -150,10 +159,14 @@
 			<p class="text-neutral">
 				<span class="underline text-secondary">Stad eigenaar:</span>
 				<br />
-				{#if animalFormData.ownerCity == '' || animalFormData.ownerCity == null}
-					<span class="text-red-500">Geen stad opgegeven</span>
+				{#if animalFormData.ownerCityName == null || animalFormData.ownerCityName == ''}
+					{#if ownerCity == null || ownerCity == ''}
+						<span class="text-red-500">Geen stad opgegeven</span>
+					{:else}
+						{catCity}
+					{/if}
 				{:else}
-					{animalFormData.ownerCity}
+					{animalFormData.ownerCityName}
 				{/if}
 			</p>
 			<p class="text-neutral">

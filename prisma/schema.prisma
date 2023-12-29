@@ -1,6 +1,7 @@
 generator zod {
-  provider = "zod-prisma-types"
-  output   = "../src/zod-schemas"
+  provider          = "zod-prisma-types"
+  output            = "../src/zod-schemas"
+  useTypeAssertions = "true"
 }
 
 generator client {
@@ -31,46 +32,57 @@ model Roles {
   User User[]
 }
 
+model Owner {
+  id          Int     @id @default(autoincrement())
+  name        String?
+  /// @zod.string.email({ message: 'Email adres klopt niet' })
+  email       String  @unique
+  street      String?
+  city        City    @relation(fields: [ownerCityId], references: [id])
+  ownerCityId Int
+  phone       String?
+  cellphone   String?
+  comments    String?
+
+  lostCats LostCat[]
+}
+
 model LostCat {
-  id             Int       @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   /// @zod.string.min(1, { message: "Gelieve een valide naam in te geven" }).max(99, { message: "Deze naam is te lang!" })
-  name           String
-  race           CatRace   @relation(fields: [raceId], references: [id])
+  name         String
+  race         CatRace   @relation(fields: [raceId], references: [id])
   /// @zod.number.gte(1, { message: "Gelieve een ras te kiezen" })
-  raceId         Int
-  sex            Sex       @relation(fields: [sexId], references: [id])
+  raceId       Int
+  sex          Sex       @relation(fields: [sexId], references: [id])
   /// @zod.number.gte(1, { message: "Gelieve een geslacht te kiezen" })
-  sexId          Int
-  castrated      Boolean?
-  color          Color     @relation(fields: [colorId], references: [id])
+  sexId        Int
+  castrated    Boolean?
+  color        Color     @relation(fields: [colorId], references: [id])
   /// @zod.number.gte(1, { message: "Gelieve een kleur te kiezen" })
-  colorId        Int
-  age            Int?
+  colorId      Int
+  age          Int?
   /// @zod.date({ required_error: "Gelieve een correcte datum te kiezen", invalid_type_error: "Gelieve een correcte datum te kiezen!" })
-  dateLost       DateTime
-  cityLost       String?
+  dateLost     DateTime
+  cityLost     City      @relation(fields: [catCityId], references: [id])
+  catCityId    Int
   /// @zod.string.min(1, { message: "Gelieve een omschrijving in te geven" }).max(999, { message: "Deze omschrijving is te lang!" })
-  description    String
+  description  String
   /// @zod.string.min(1, { message: "Gelieve een foto te uploaden" })
-  photoUrl       String?
-  chipped        Boolean?
-  chipNumber     String?   @unique
-  collar         String?
-  /// @zod.string.min(1, { message: "Gelieve een naam in te geven voor het baasje" }).max(99, { message: "Deze naam is te lang!" })
-  ownerName      String
-  ownerEmail     String
-  ownerStreet    String
-  ownerCity      String
-  ownerPhone     String?
-  ownerCellphone String?
-  response       String?
-  comments       String?
-  rip            Boolean?
+  photoUrl     String?
+  chipped      Boolean?
+  chipNumber   String?   @unique
+  collar       String?
+  owner        Owner     @relation(fields: [ownerId], references: [id])
+  ownerId      Int
+  response     String?
+  comments     String?
+  rip          Boolean?
   /// @zod.date({ required_error: "Gelieve een correcte datum te kiezen", invalid_type_error: "Gelieve een correcte datum te kiezen!" })
-  dateReported   DateTime
-  location       Location? @relation(fields: [locationId], references: [id])
+  dateReported DateTime
+  location     Location? @relation(fields: [locationId], references: [id])
   /// @zod.number.gte(1, { message: "Gelieve een locatie te kiezen" })
-  locationId     Int?
+  locationId   Int?
 }
 
 model CatRace {
@@ -99,4 +111,13 @@ model Color {
   name    String    @unique
   enabled Boolean   @default(true)
   LostCat LostCat[]
+}
+
+model City {
+  id      Int     @id @default(autoincrement())
+  name    String  @unique
+  enabled Boolean @default(true)
+
+  owner    Owner[]
+  lostCats LostCat[]
 }

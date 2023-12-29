@@ -21,32 +21,34 @@
 	let cityLostInput: string;
 	let ownerCityLostChosen: any;
 	let ownerCityLostInput: string;
+	let existingOwner: any;
+	let selectedExistingOwner: any;
 
 	export let data: PageData;
 	const { form, errors, message } = superForm(data.form);
 
 	$: if (cityLostChosen?.label === 'Nieuwe stad toevoegen') {
 		showCityLostInput = true;
-		$form.cityLost = cityLostInput;
+		$form.catCityName = cityLostInput;
 	} else {
 		showCityLostInput = false;
-		$form.cityLost = cityLostChosen?.label;
+		$form.catCityId = cityLostChosen?.value;
 	}
 
 	$: if (ownerCityLostChosen?.label === 'Nieuwe stad toevoegen') {
 		showOwnerCityLostInput = true;
-		$form.ownerCity = ownerCityLostInput;
+		$form.ownerCityName = ownerCityLostInput;
 	} else {
 		showOwnerCityLostInput = false;
-		$form.ownerCity = ownerCityLostChosen?.label;
+		$form.ownerCityId = ownerCityLostChosen?.value;
 	}
 
 	$: if (message != null) {
 		currentPage = 1;
 	}
 
-	$: if ($errors != null) {
-		currentPage = 1;
+	$: if (message == null && message != null) {
+		currentPage = 2;
 	}
 
 	$: if (photoUrl != null) {
@@ -65,6 +67,20 @@
 	}
 	$: if ($form.chipped === false) {
 		$form.chipNumber = null;
+	}
+
+	$: if (existingOwner) {
+		selectedExistingOwner = data.ownersNotMapped.find((owner) => owner.id === existingOwner);
+		if (selectedExistingOwner) {
+			$form.ownerId = selectedExistingOwner.id;
+			$form.ownerName = selectedExistingOwner.name;
+			$form.ownerEmail = selectedExistingOwner.email;
+			$form.ownerStreet = selectedExistingOwner.street;
+			$form.ownerCityId = selectedExistingOwner.ownerCityId;
+			$form.ownerPhone = selectedExistingOwner.phone;
+			$form.ownerCellphone = selectedExistingOwner.cellphone;
+			$form.ownerComments = selectedExistingOwner.comments;
+		}
 	}
 
 	function previousStep(): any {
@@ -128,7 +144,7 @@
 							: 'border-gray-300'}"
 						type="radio"
 						name="sexId"
-						value={13}
+						value={1}
 						aria-label="Mannetje"
 						bind:group={$form.sexId}
 					/>
@@ -138,7 +154,7 @@
 							: 'border-gray-300'}"
 						type="radio"
 						name="sexId"
-						value={14}
+						value={2}
 						aria-label="Vrouwtje"
 						bind:group={$form.sexId}
 					/>
@@ -327,31 +343,33 @@
 				{#if $errors.dateReported}
 					<p class="text-red-500">Gelieve een correcte datum in te geven</p>
 				{/if}
-				<label class="label underline" for="cityLost">
+				<label class="label underline" for="catCityId">
 					<span class="label-text text-secondary">Stad verloren*</span>
 				</label>
-				<input type="hidden" name="cityLost" bind:value={$form.cityLost} />
+				<input type="hidden" name="catCityId" bind:value={$form.catCityId} />
 				<Select
 					items={data.cities}
-					name="cityLost"
 					placeholder="Maak een keuze"
 					bind:value={cityLostChosen}
 					showChevron
 				/>
+				{#if $errors.catCityId}
+					<p class="text-red-500">{$errors.catCityId}</p>
+				{/if}
 				{#if showCityLostInput}
-					<label class="label underline" for="newCity">
+					<label class="label underline" for="catCityName">
 						<span class="label-text text-secondary">Voeg nieuwe stad toe</span>
 					</label>
 					<input
 						type="text"
-						name="newCity"
+						name="catCityName"
 						placeholder="Vb. Wilrijk"
 						class="input input-bordered border-gray-300 w-full text-secondary bg-white max-w-md"
-						bind:value={$form.cityLost}
+						bind:value={$form.catCityName}
 					/>
-				{/if}
-				{#if $errors.cityLost}
-					<p class="text-red-500">{$errors.cityLost}</p>
+					{#if $errors.catCityName}
+						<p class="text-red-500">{$errors.catCityName}</p>
+					{/if}
 				{/if}
 				<label class="label underline" for="description">
 					<span class="label-text text-secondary">Omschrijving*</span>
@@ -442,17 +460,46 @@
 				{#if $errors.rip}
 					<p class="text-red-500">Duid aan of de kat overleden is</p>
 				{/if}
+				<label class="label underline" for="comments">
+					<span class="label-text text-secondary">Opmerkingen kat</span>
+				</label>
+				<textarea
+					name="comments"
+					class="textarea textarea-bordered w-full border-gray-300 bg-white text-secondary"
+					placeholder="Vb. Kat is nogal slecht te been, kan goed overweg met andere katten."
+					bind:value={$form.comments}
+				/>
+				{#if $errors.comments}
+					<p class="text-red-500">{$errors.comments}</p>
+				{/if}
 			</div>
 		</div>
 		<div
 			class="form-control w-full grid grid-cols-1 md:grid-cols-2 gap-5"
 			class:hide={currentPage != 2}
 		>
-			<div class="w-full max-w-sm col-span-2">
+			<div class="w-full max-w-sm col-span-1">
 				<p class="text-2xl py-2 justify-center text-secondary w-full underline">
 					Gegevens eigenaar:
 				</p>
 			</div>
+			<!-- TODO: ownerCityId Select updaten bij het kiezen van bestaande eigenaar -->
+			<div class="w-full max-w-sm col-span-1">
+				<div class="form-control w-full max-w-md md:mx-1">
+					<label class="label underline" for="raceId">
+						<span class="label-text text-secondary">Selecteer een bestaande eigenaar</span>
+					</label>
+					<input type="hidden" name="raceId" bind:value={existingOwner} />
+					<Select
+						items={data.owners}
+						class="select border bg-white w-full text-secondary select-bordered border-gray-300"
+						placeholder="Maak een keuze"
+						bind:justValue={existingOwner}
+						showChevron
+					/>
+				</div>
+			</div>
+
 			<div class="w-full max-w-sm">
 				<label class="label underline" for="ownerName">
 					<span class="label-text text-secondary">Naam</span>
@@ -493,31 +540,30 @@
 				{#if $errors.ownerStreet}
 					<p class="text-red-500">{$errors.ownerStreet}</p>
 				{/if}
-				<label class="label underline" for="ownerCity">
+				<label class="label underline" for="ownerCityId">
 					<span class="label-text text-secondary">Stad</span>
 				</label>
-				<input type="hidden" name="ownerCity" bind:value={$form.ownerCity} />
+				<input type="hidden" name="ownerCityId" bind:value={$form.ownerCityId} />
 				<Select
 					items={data.cities}
-					name="ownerCity"
 					placeholder="Maak een keuze"
 					bind:value={ownerCityLostChosen}
 					showChevron
 				/>
 				{#if showOwnerCityLostInput}
-					<label class="label underline" for="newOwnerCity">
+					<label class="label underline" for="ownerCityName">
 						<span class="label-text text-secondary">Voeg nieuwe stad toe</span>
 					</label>
 					<input
 						type="text"
-						name="newOwnerCity"
+						name="ownerCityName"
 						placeholder="Vb. Wilrijk"
 						class="input input-bordered border-gray-300 w-full text-secondary bg-white max-w-md"
-						bind:value={$form.ownerCity}
+						bind:value={$form.ownerCityName}
 					/>
 				{/if}
-				{#if $errors.ownerCity}
-					<p class="text-red-500">{$errors.ownerCity}</p>
+				{#if $errors.ownerCityName}
+					<p class="text-red-500">{$errors.ownerCityName}</p>
 				{/if}
 			</div>
 			<div class="w-full max-w-sm">
@@ -547,17 +593,17 @@
 				{#if $errors.ownerCellphone}
 					<p class="text-red-500">{$errors.ownerCellphone}</p>
 				{/if}
-				<label class="label underline" for="comments">
-					<span class="label-text text-secondary">Opmerkingen</span>
+				<label class="label underline" for="ownerComments">
+					<span class="label-text text-secondary">Opmerkingen Eigenaar</span>
 				</label>
 				<textarea
-					name="comments"
+					name="ownerComments"
 					class="textarea textarea-bordered w-full border-gray-300 bg-white text-secondary"
-					placeholder="Vb. De kat is heel lief en aanhankelijk, maar kan niet goed overweg met andere katten."
-					bind:value={$form.comments}
+					placeholder="Vb. Eigenaar gedroeg zich niet aangenaam."
+					bind:value={$form.ownerComments}
 				/>
-				{#if $errors.comments}
-					<p class="text-red-500">{$errors.comments}</p>
+				{#if $errors.ownerComments}
+					<p class="text-red-500">{$errors.ownerComments}</p>
 				{/if}
 				<label class="label underline" for="locationId">
 					<span class="label-text text-secondary">Locatie</span>
@@ -580,6 +626,7 @@
 				races={data.races}
 				colors={data.colors}
 				locations={data.locations}
+				cities={data.cities}
 			/>
 		</div>
 		<div class="flex justify-center gap-5 my-4">
