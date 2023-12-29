@@ -5,6 +5,8 @@
 	let avatarUrl: string = '/placeholder.png';
 
 	export let animal: any;
+
+	$: animal, console.log(animal);
 </script>
 
 <div class="card min-w-fit lg:card-side lg:max-h-[430px] shadow-xl bg-primary">
@@ -40,7 +42,10 @@
 			<span class="text-secondary">Datum verloren:</span>
 			{formatDate(animal.dateLost)}
 		</p>
-		<p class="text-neutral"><span class="text-secondary">Verloren te:</span> {animal.age}</p>
+		<p class="text-neutral">
+			<span class="text-secondary">Verloren te:</span>
+			{animal.cityLost.name}
+		</p>
 		<p class="text-neutral">
 			<span class="text-secondary">Straat verloren:</span>
 			{animal.owner.street}

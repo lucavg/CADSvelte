@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import LostAnimal from '$lib/components/animalCards/LostAnimal.svelte';
 	import { page } from '$app/stores';
-	import { browser } from '$app/environment';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	let pagedData: any[] = [];
 	let raceFilter: string | null = '';
 	let sexFilter: string | null = '';
 	let colorFilter: string | null = '';
